@@ -1,9 +1,9 @@
-using System.ComponentModel;
-using System.IO;
-using System.Numerics;
 using GFDLibrary;
 using GFDLibrary.Materials;
 using GFDStudio.GUI.TypeConverters;
+using System.ComponentModel;
+using System.IO;
+using System.Numerics;
 
 namespace GFDStudio.GUI.DataViewNodes
 {
@@ -16,53 +16,76 @@ namespace GFDStudio.GUI.DataViewNodes
             => DataViewNodeFlags.Leaf;
 
         // 0C
-        [ Browsable( true ) ]
-        [ TypeConverter( typeof( Vector4TypeConverter ) ) ]
-        [DisplayName("Inner Glow")]
-        public Vector4 InnerGlow
+        [Browsable( true )]
+        [TypeConverter( typeof( Vector4TypeConverter ) )]
+        [DisplayName( "Light Color (float)" )]
+        public Vector4 LightColor
         {
-            get => GetDataProperty<Vector4>();
+            get => Data.LightColor;
             set => SetDataProperty( value );
+        }
+
+        [DisplayName( "Light Color (RGBA)" )]
+        public System.Drawing.Color LightColorRGBA
+        {
+            get => Data.LightColor.ToByte();
+            set => Data.LightColor = value.ToFloat();
         }
 
         // 1C
         [Browsable( true )]
-        public float Field1C
+        [DisplayName( "Light threshold" )]
+        public float LightTreshold
         {
-            get => GetDataProperty<float>();
+            get => Data.LightTreshold;
             set => SetDataProperty( value );
         }
 
         // 20
         [Browsable( true )]
-        public float Field20
+        [DisplayName( "Light factor" )]
+        public float LightFactor
         {
-            get => GetDataProperty<float>();
+            get => Data.LightFactor;
             set => SetDataProperty( value );
         }
 
         // 24
         [Browsable( true )]
         [TypeConverter( typeof( Vector4TypeConverter ) )]
-        public Vector4 Field24
+        [DisplayName( "Shadow Color (float)" )]
+        public Vector4 ShadowColor
         {
-            get => GetDataProperty<Vector4>();
+            get => Data.ShadowColor;
             set => SetDataProperty( value );
+        }
+
+        [DisplayName( "Shadow Color (RGBA)" )]
+        public System.Drawing.Color ShadowColorRGBA
+        {
+            get => Data.ShadowColor.ToByte();
+            set
+            {
+                Data.ShadowColor = value.ToFloat();
+                NotifyPropertyChanged( nameof( ShadowColorRGBA ) );
+            }
         }
 
         // 34
         [Browsable( true )]
-        public float Field34
+        [DisplayName( "Shadow threshold" )]
+        public float ShadowThreshold
         {
-            get => GetDataProperty<float>();
+            get => Data.ShadowThreshold;
             set => SetDataProperty( value );
         }
 
         // 38
         [Browsable( true )]
-        public float Field38
+        [DisplayName( "Shadow factor" )]
+        public float ShadowFactor
         {
-            get => GetDataProperty<float>();
+            get => Data.ShadowFactor;
             set => SetDataProperty( value );
         }
 

@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel;
 using GFDLibrary;
 using GFDLibrary.Common;
+using GFDLibrary.Conversion;
+using GFDLibrary.Conversion.AssimpNet;
+using GFDLibrary.Conversion.AssimpNet.Utilities;
 using GFDLibrary.Models;
-using GFDLibrary.Models.Conversion;
+using GFDStudio.FormatModules;
 using GFDStudio.GUI.Forms;
 using GFDStudio.GUI.TypeConverters;
 
@@ -51,24 +54,20 @@ namespace GFDStudio.GUI.DataViewNodes
         protected override void InitializeCore()
         {
             base.InitializeCore();
-            RegisterReplaceHandler<Assimp.Scene>( path =>
+            RegisterReplaceHandler<AssimpScene>( path =>
             {
-                using ( var dialog = new ModelConverterOptionsDialog( true ) )
+                var scene = AssimpHelper.ImportScene( path );
+                var originalModel = Parent?.Data as ModelPack;
+
+                using ( var dialog = new ModelConversionOptionsDialog( scene, originalModel ) )
                 {
                     if ( dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK )
                         return Data;
 
-                    ModelConverterOptions options = new ModelConverterOptions()
-                    {
-                        Version = dialog.Version,
-                        ConvertSkinToZUp = dialog.ConvertSkinToZUp,
-                        GenerateVertexColors = dialog.GenerateVertexColors,
-                        MinimalVertexAttributes = dialog.MinimalVertexAttributes
-                    };
-
-                    var scene = ModelConverter.ConvertFromAssimpScene( path, options );
-                    if ( scene != null )
-                        Data.ReplaceWith( scene );
+                    var options = dialog.GetModelConversionOptions();
+                    var model = AssimpNetModelConverter.ConvertFromAssimpScene( scene, options );
+                    if ( model != null )
+                        Data.ReplaceWith( model );
 
                     return Data;
                 }

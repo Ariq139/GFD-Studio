@@ -1,38 +1,41 @@
 !Material
 ResourceType: Material
-Name: gfdDefaultMat0
-Flags: Bit0, Bit1, EnableLight2
-AmbientColor:
-  X: 0.60000002384185791
-  Y: 0.60000002384185791
-  Z: 0.60000002384185791
-  W: 1
-DiffuseColor:
-  X: 0.89999997615814209
-  Y: 0.89999997615814209
-  Z: 0.89999997615814209
-  W: 1
-SpecularColor: &o0
-  X: 0
-  Y: 0
-  Z: 0
-  W: 0
-EmissiveColor: *o0
-Field40: 1
-Field44: 0
+Name: 1_gfdDefaultMat0
+Flags: HasAmbientColor, HasDiffuseColor, EnableLight
 DrawMethod: Opaque
-Field49: 1
-Field4A: 0
-Field4B: 1
-Field4C: 0
-Field4D: 1
-Field90: 0
-Field92: 4
-Field94: 0
-Field96: 0
-Field5C: 0
-Field6C: 4294967295
-Field70: 4294967295
+LegacyParameters: !MaterialLegacyParameters
+  ResourceType: MaterialParameterSetLegacy
+  AmbientColor:
+    X: 0.6
+    Y: 0.6
+    Z: 0.6
+    W: 1
+  DiffuseColor:
+    X: 0.9
+    Y: 0.9
+    Z: 0.9
+    W: 1
+  EmissiveColor: &o0
+    X: 0
+    Y: 0
+    Z: 0
+    W: 0
+  SpecularColor: *o0
+  Reflectivity: 1
+  Diffusivity: 0
+  Version: 17846384
+BlendSourceColor: 1
+BlendDestinationColor: 0
+SourceAlpha: 1
+DestinationAlpha: 0
+HighlightMapBlendMode: Lerp
+AlphaClip: 0
+AlphaClipMode: Greater
+Flags2: 0
+SortPriority: 0
+ShaderId: 0
+TexCoordFlags0: 4294967295
+TexCoordFlags1: 4294967295
 DisableBackfaceCulling: 0
 Field98: 4294967295
 DiffuseMap: 
@@ -44,6 +47,7 @@ GlowMap:
 NightMap: 
 DetailMap: 
 ShadowMap: 
+TextureMap10: 
 TextureMaps:
 - 
 - 
@@ -54,6 +58,16 @@ TextureMaps:
 - 
 - 
 - 
+- 
 Attributes: 
-IsPresetMaterial: false
+METAPHOR_UseMaterialParameterSet: false
+METAPHOR_MaterialParameterSet: 
+Field6C_2: 0
+MatFlags0: 0
+MatFlags1: 0
+MatFlags2: 0
+RuntimeMetadata:
+  GeometryFlags: null
+  VertexAttributeFlags: null
+  IsCustomMaterial: false
 Version: 17846384

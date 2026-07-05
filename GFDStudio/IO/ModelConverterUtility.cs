@@ -1,6 +1,11 @@
-﻿using System.Windows.Forms;
+﻿using System.Linq;
+using System.Windows.Forms;
 using GFDLibrary;
-using GFDLibrary.Models.Conversion;
+using GFDLibrary.Conversion;
+using GFDLibrary.Conversion.AssimpNet;
+using GFDLibrary.Conversion.AssimpNet.Utilities;
+using GFDLibrary.Materials;
+using GFDLibrary.Models;
 using GFDStudio.FormatModules;
 using GFDStudio.GUI.Forms;
 
@@ -8,14 +13,14 @@ namespace GFDStudio.IO
 {
     public static class ModelConverterUtility
     {
-        public static ModelPack ConvertAssimpModel()
+        public static ModelPack ConvertAssimpModel(ModelPack originalModel)
         {
             using ( var dialog = new OpenFileDialog() )
             {
                 dialog.AutoUpgradeEnabled = true;
                 dialog.CheckPathExists = true;
                 dialog.CheckFileExists = true;
-                dialog.Filter = ModuleFilterGenerator.GenerateFilter( FormatModuleUsageFlags.ImportForEditing, typeof( Assimp.Scene ) ).Filter;
+                dialog.Filter = ModuleFilterGenerator.GenerateFilter( FormatModuleUsageFlags.ImportForEditing, typeof( AssimpScene ) ).Filter;
                 dialog.Multiselect = false;
                 dialog.SupportMultiDottedExtensions = true;
                 dialog.Title = "Select an Assimp model.";
@@ -26,27 +31,20 @@ namespace GFDStudio.IO
                     return null;
                 }
 
-                return ConvertAssimpModel( dialog.FileName );
+                return ConvertAssimpModel( dialog.FileName, originalModel );
             }
         }
 
-        public static ModelPack ConvertAssimpModel( string path )
+        public static ModelPack ConvertAssimpModel( string path, ModelPack originalModel)
         {
-            using ( var dialog = new ModelConverterOptionsDialog( false ) )
+            var scene = AssimpHelper.ImportScene( path );
+            using ( var dialog = new ModelConversionOptionsDialog( scene, originalModel ) )
             {
                 if ( dialog.ShowDialog() != DialogResult.OK )
                     return null;
 
-                ModelPackConverterOptions options = new ModelPackConverterOptions()
-                {
-                    MaterialPreset = dialog.MaterialPreset,
-                    Version = dialog.Version,
-                    ConvertSkinToZUp = dialog.ConvertSkinToZUp,
-                    GenerateVertexColors = dialog.GenerateVertexColors,
-                    MinimalVertexAttributes = dialog.MinimalVertexAttributes
-                };
-
-                return ModelPackConverter.ConvertFromAssimpScene( path, options );
+                var options = dialog.GetModelConversionOptions();
+                return AssimpNetModelPackConverter.ConvertFromAssimpScene( path, options );
             }
         }
     }

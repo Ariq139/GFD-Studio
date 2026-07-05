@@ -1,10 +1,14 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using GFDLibrary.Animations;
 using GFDLibrary.IO;
 using GFDLibrary.Materials;
 using GFDLibrary.Misc;
 using GFDLibrary.Models;
 using GFDLibrary.Textures;
+using GFDLibrary.Textures.Texpack;
 
 namespace GFDLibrary
 {
@@ -130,6 +134,27 @@ namespace GFDLibrary
                     default:
                         reader.SeekCurrent( chunkDataLength );
                         continue;
+                }
+            }
+
+            // Populate (semantic) metadata fields
+            if ( Materials is not null )
+            {
+                if ( Model is not null )
+                {
+                    foreach ( var mat in Materials.Values )
+                    {
+                        var meshesWithMaterial = Model.Nodes
+                            .SelectMany( n => n.Meshes )
+                            .Where( m => m.MaterialName == mat.Name )
+                            .ToList();
+                        if (meshesWithMaterial.Count > 0 )
+                        {
+                            mat.RuntimeMetadata.IsCustomMaterial = false;
+                            mat.RuntimeMetadata.GeometryFlags = meshesWithMaterial.Max( m => m.Flags );
+                            mat.RuntimeMetadata.VertexAttributeFlags = meshesWithMaterial.Max( m => m.VertexAttributeFlags );
+                        }
+                    }
                 }
             }
         }

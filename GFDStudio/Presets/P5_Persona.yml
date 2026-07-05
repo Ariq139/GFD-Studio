@@ -1,0 +1,175 @@
+!Material
+ResourceType: Material
+Name: P5_Persona
+Flags: HasAmbientColor, HasDiffuseColor, HasSpecularColor, ApplyFog, Diffusitivity, EnableLight, CastShadow, HasAttributes, HasOutline, HasDiffuseMap, HasSpecularMap, HasShadowMap
+DrawMethod: Opaque
+LegacyParameters: !MaterialLegacyParameters
+  ResourceType: MaterialParameterSetLegacy
+  AmbientColor:
+    X: 0.6
+    Y: 0.6
+    Z: 0.6
+    W: 1
+  DiffuseColor:
+    X: 0.3
+    Y: 0.3
+    Z: 0.3
+    W: 1
+  EmissiveColor: &o3
+    X: 0
+    Y: 0
+    Z: 0
+    W: 0
+  SpecularColor:
+    X: 0.9
+    Y: 0.9
+    Z: 0.9
+    W: 10
+  Reflectivity: 1
+  Diffusivity: 0.1
+  Version: 17846384
+BlendSourceColor: 1
+BlendDestinationColor: 0
+SourceAlpha: 1
+DestinationAlpha: 0
+HighlightMapBlendMode: Lerp
+AlphaClip: 0
+AlphaClipMode: Greater
+Flags2: ShadowMapAdd
+SortPriority: 0
+ShaderId: 3
+TexCoordFlags0: 4177526328
+TexCoordFlags1: 4177526328
+DisableBackfaceCulling: 0
+Field98: 4294967295
+DiffuseMap: &o0 !TextureMap
+  ResourceType: TextureMap
+  Name: dum_b.dds
+  Flags: 0
+  MinificationFilter: Linear
+  MagnificationFilter: Linear
+  WrapModeU: Repeat
+  WrapModeV: Repeat
+  Field4C: 1
+  Field50: 0
+  Field54: 0
+  Field58: 0
+  Field5C: 0
+  Field60: 1
+  Field64: 0
+  Field68: 0
+  Field6C: 0
+  Field70: 0
+  Field74: 0
+  Field78: 0
+  Field7C: 0
+  Field80: 0
+  Field84: 0
+  Field88: 0
+  Version: 17846384
+NormalMap: 
+SpecularMap: &o1 !TextureMap
+  ResourceType: TextureMap
+  Name: dum_b.dds
+  Flags: 0
+  MinificationFilter: Linear
+  MagnificationFilter: Linear
+  WrapModeU: Repeat
+  WrapModeV: Repeat
+  Field4C: 1
+  Field50: 0
+  Field54: 0
+  Field58: 0
+  Field5C: 0
+  Field60: 1
+  Field64: 0
+  Field68: 0
+  Field6C: 0
+  Field70: 0
+  Field74: 0
+  Field78: 0
+  Field7C: 0
+  Field80: 0
+  Field84: 0
+  Field88: 0
+  Version: 17846384
+ReflectionMap: 
+HighlightMap: 
+GlowMap: 
+NightMap: 
+DetailMap: 
+ShadowMap: &o2 !TextureMap
+  ResourceType: TextureMap
+  Name: dum_b.dds
+  Flags: 0
+  MinificationFilter: Linear
+  MagnificationFilter: Linear
+  WrapModeU: Repeat
+  WrapModeV: Repeat
+  Field4C: 1
+  Field50: 0
+  Field54: 0
+  Field58: 0
+  Field5C: 0
+  Field60: 1
+  Field64: 0
+  Field68: 0
+  Field6C: 0
+  Field70: 0
+  Field74: 0
+  Field78: 0
+  Field7C: 0
+  Field80: 0
+  Field84: 0
+  Field88: 0
+  Version: 17846384
+TextureMap10: 
+TextureMaps:
+- *o0
+- 
+- *o1
+- 
+- 
+- 
+- 
+- 
+- *o2
+- 
+Attributes:
+- !MaterialAttributeType1
+  Field0C: 0
+  LightColor:
+    X: 0.2352941
+    Y: 0.5960785
+    Z: 1
+    W: 1
+  LightTreshold: 0.85
+  LightFactor: 2
+  ShadowColor: *o3
+  ShadowThreshold: 0
+  ShadowFactor: 0
+  Type1Flags: Backlight
+  ResourceType: MaterialAttribute
+  RawFlags: 65537
+  Flags: Bit0
+  AttributeType: Type1
+  Version: 17846384
+- !MaterialAttributeType2
+  Flags2: Normal
+  Color: 121
+  ResourceType: MaterialAttribute
+  RawFlags: 65538
+  Flags: Bit0
+  AttributeType: Type2
+  Version: 17846384
+METAPHOR_UseMaterialParameterSet: false
+METAPHOR_MaterialParameterSet: 
+Field6C_2: 0
+MatFlags0: 0
+MatFlags1: 0
+MatFlags2: 0
+RuntimeMetadata:
+  GeometryFlags: null
+  VertexAttributeFlags: null
+  IsCustomMaterial: false
+Version: 17846384

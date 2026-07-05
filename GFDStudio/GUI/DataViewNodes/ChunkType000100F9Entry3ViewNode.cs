@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using GFDLibrary.Misc;
+﻿using GFDLibrary.Misc;
+using System.ComponentModel;
 
 namespace GFDStudio.GUI.DataViewNodes
 {
@@ -12,42 +12,42 @@ namespace GFDStudio.GUI.DataViewNodes
             DataViewNodeFlags.Leaf;
 
         [Browsable( true )]
-        [DisplayName( "Gravity" )]
-        public float Field00
+        [DisplayName( "Length (Squared)" )]
+        public float LengthSq
         {
-            get => GetDataProperty<float>();
+            get => Data.LengthSq;
             set => SetDataProperty( value );
         }
 
         [Browsable( true )]
-        [DisplayName( "Maximum rotation angle" )]
-        public float Field04
+        [DisplayName( "Angular Limit" )]
+        public float AngularLimit
         {
-            get => GetDataProperty<float>();
+            get => Data.AngularLimit;
             set => SetDataProperty( value );
         }
 
         [Browsable( true )]
-        [DisplayName( "Bone thickness" )]
-        public float Field08
+        [DisplayName( "Chain thickness" )]
+        public float ChainThickness
         {
-            get => GetDataProperty<float>();
+            get => Data.ChainThickness;
             set => SetDataProperty( value );
         }
 
         [Browsable( true )]
         [DisplayName( "Parent bone" )]
-        public short Field0C
+        public short ParentBoneIndex
         {
-            get => GetDataProperty<short>();
+            get => Data.ParentBoneIndex;
             set => SetDataProperty( value );
         }
 
         [Browsable( true )]
         [DisplayName( "Child bone" )]
-        public short Field0E
+        public short ChildBoneIndex
         {
-            get => GetDataProperty<short>();
+            get => Data.ChildBoneIndex;
             set => SetDataProperty( value );
         }
 

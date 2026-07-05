@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using GFDLibrary.Conversion;
 using GFDLibrary.IO;
-using GFDLibrary.Models.Conversion;
 
 namespace GFDLibrary.Materials
 {
@@ -30,7 +29,7 @@ namespace GFDLibrary.Materials
             set => mDictionary[name] = value;
         }
 
-        public static MaterialDictionary ConvertAllToMaterialPreset( MaterialDictionary materialDictionary, ModelPackConverterOptions options )
+        public static MaterialDictionary ConvertAllToMaterialPreset( MaterialDictionary materialDictionary, ModelConverterOptions options )
         {
             Material newMaterial = null;
             var newMaterialDictionary = new MaterialDictionary(options.Version);
@@ -47,7 +46,7 @@ namespace GFDLibrary.Materials
                     specularTexture = material.DiffuseMap;
                 if (diffuseTexture == null) newMaterial = material;
 
-                else newMaterial = MaterialFactory.CreateMaterial( materialName, diffuseTexture.Name, options );
+                else newMaterial = MaterialFactory.CreateMaterial( materialName, diffuseTexture.Name, options.DefaultMaterial.Preset );
                 newMaterialDictionary.Add(newMaterial);
             }
 
@@ -59,7 +58,7 @@ namespace GFDLibrary.Materials
             foreach (var material in other)
             {
                 // Don't replace the material if we're replacing a normal material with a preset one.
-                if (!ContainsKey(material.Key) || !material.Value.IsPresetMaterial || this[material.Key].IsPresetMaterial)
+                if (!ContainsKey(material.Key) || !material.Value.RuntimeMetadata.IsCustomMaterial || this[material.Key].RuntimeMetadata.IsCustomMaterial )
                     this[material.Key] = material.Value;
             }
 

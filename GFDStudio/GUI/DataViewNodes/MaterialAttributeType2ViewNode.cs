@@ -2,6 +2,8 @@ using System.ComponentModel;
 using System.IO;
 using GFDLibrary;
 using GFDLibrary.Materials;
+using GFDStudio.GUI.TypeConverters;
+using static GFDLibrary.Materials.MaterialAttributeType2;
 
 namespace GFDStudio.GUI.DataViewNodes
 {
@@ -15,19 +17,20 @@ namespace GFDStudio.GUI.DataViewNodes
 
         // 0C
         [ Browsable( true ) ]
-        [DisplayName( "Category" )]
-        public int Field0C
+        [TypeConverter( typeof( EnumTypeConverter<MaterialAttributeType2Flags> ) )]
+        [DisplayName( "Flags" )]
+        public new MaterialAttributeType2Flags Flags2
         {
-            get => GetDataProperty<int>();
+            get => Data.Flags2;
             set => SetDataProperty( value );
         }
 
         // 10
         [Browsable( true )]
         [DisplayName( "Color" )]
-        public int Field10
+        public int Color
         {
-            get => GetDataProperty<int>();
+            get => Data.Color;
             set => SetDataProperty( value );
         }
 
